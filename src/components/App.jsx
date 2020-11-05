@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import Modal from "./Modal";
 import Posts from "./Posts";
 import PostForm from "./PostForm";
+import FetchedPost from "./FetchedPost";
 
-class Home extends React.Component {
+class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -18,12 +19,12 @@ class Home extends React.Component {
                 <div className="container">
                     <div className="row">
                         <div className="col">
-                            <h2>Post</h2>
-                            <Posts posts={[1, 2, 3]}/>
+                            <h2>Sync Post</h2>
+                            <Posts/>
                         </div>
                         <div className="col">
-                            <h2>Post</h2>
-                            <Posts posts={[]}/>
+                            <h2>Fetch Posts</h2>
+                            <FetchedPost/>
                         </div>
                         <div className="col">
                             <h2>New Post</h2>
@@ -40,8 +41,4 @@ class Home extends React.Component {
     }
 }
 
-Home.propTypes = {
-
-}
-
-export default Home;
+export default App;

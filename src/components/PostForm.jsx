@@ -1,10 +1,14 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {createPost} from "../redux/actions";
+import cn from 'classnames';
 
-export default class PostForm extends React.Component {
+class PostForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: ''
+            title: '',
+            isEmpty: false
         }
     }
     submitHandler(event) {
@@ -15,9 +19,17 @@ export default class PostForm extends React.Component {
         const  newPost = {
             title, id: Date.now().toString()
         }
-        this.setState({title: ''});
+        if (newPost.title.trim()) {
+            this.props.createPost(newPost);
+            this.setState({
+                title: '',
+                isEmpty: false
+            });
+        }
+        else {
+            this.setState({isEmpty: true});
+        }
 
-        console.log(newPost);
 
     }
     changeHandler(event) {
@@ -42,7 +54,13 @@ export default class PostForm extends React.Component {
                     />
                 </div>
                 <button className="btn btn-success" type="submit">Create</button>
+                <p className={cn({"d-none": !this.state.isEmpty})}>Field is empty</p>
             </form>
         )
     }
 }
+
+const mapDispatchToProps = {
+    createPost
+}
+export default connect(null, {createPost})(PostForm);

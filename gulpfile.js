@@ -40,9 +40,13 @@ gulp.task('dev', function(callback) {
     // modify some webpack config options
     var myConfig = Object.create(conf);
     var compiler = webpack(conf);
+    if (!global._babelPolyfill) {
+        require('babel-polyfill');
+    }
     new WebpackDevServer(webpack(
+
         {
-            entry: "./src/index.js",
+            entry: ['babel-polyfill', './src/index.js'],
             output:{
                 path: __dirname+ '/public/',
                 publicPath: '/',
@@ -73,7 +77,7 @@ gulp.task('dev', function(callback) {
             },
             plugins: [new HtmlWebPackPlugin({
                 template: "./src/index.html",
-                inject: true,
+                inject: false,
                 hash: true
             })]
 

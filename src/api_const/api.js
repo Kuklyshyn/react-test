@@ -1,0 +1,1 @@
+export const API_POST = 'https://jsonplaceholder.typicode.com/posts?_limit=5';

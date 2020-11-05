@@ -5,7 +5,7 @@ const PUBLIC_PATH = path.resolve(__dirname, 'public');
 const INDEX_HTML_PATH = path.resolve(PUBLIC_PATH, 'index.html');
 
 module.exports = {
-    entry: "./src/index.js",
+    entry: ['babel-polyfill', './src/index.js'],
     output:{
         path: PUBLIC_PATH,
         publicPath: '/',
@@ -35,7 +35,7 @@ module.exports = {
     },
     plugins: [new HtmlWebPackPlugin({
         template: INDEX_HTML_PATH,
-        inject: true,
+        inject: false,
         hash: true
     })]
 
